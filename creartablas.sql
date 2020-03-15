@@ -15,7 +15,7 @@ CREATE TABLE Mazo(
 	TotalCartasMontruo INT,
 	TotalCartasMagica INT,
 	TotalCartasTrampa INT,
-  codJugador VARCHAR2(30), 
+	codJugador VARCHAR2(30), 
 	CONSTRAINT PK_Mazo PRIMARY KEY (CodMazo),
 	CONSTRAINT FK_codJugadorM FOREIGN KEY (codJugador) REFERENCES Jugador(CodJugador)ON DELETE CASCADE
 );
@@ -24,7 +24,7 @@ CREATE TABLE Duelo(
 	IdDuelo VARCHAR2(30),
 	CodJugador1 VARCHAR2(30),
 	CodJugador2 VARCHAR2(30),
-  CodMazoJ1 VARCHAR2(30),
+	CodMazoJ1 VARCHAR2(30),
 	CodMazoJ2 VARCHAR2(30),
 	fechaDuelo DATE,
 	duracion INT,
@@ -136,7 +136,7 @@ CREATE TABLE HistorialDuelos (
     CONSTRAINT PK_HistorialDuelos PRIMARY KEY(IdDuelo,ganador),
     /*FALTAN LAS FOREIGN KEYS*/
     CONSTRAINT FK_TurnoDuelo FOREIGN KEY(IdDuelo) REFERENCES Duelo(IdDuelo) CASCADE CONSTRAINTS,
-    CONSTRAINT FK_GanadorDuelo FOREIGN KEY(ganador) REFERENCES JUGADOR(CodJugador) CASCADE CONSTRAINTS
+    CONSTRAINT FK_GanadorDuelo FOREIGN KEY(ganador) REFERENCES Jugador(CodJugador) CASCADE CONSTRAINTS
     );
 show errors;
     
