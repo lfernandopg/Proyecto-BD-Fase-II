@@ -102,3 +102,5 @@ CREATE TABLE Turno(
 	CONSTRAINT FK_IdCartaTrampaJugador FOREIGN KEY (IdCartaTrampaJugador) REFERENCES CartaTrampa(idCartaT),
 	CONSTRAINT FK_IdCartaTrampaRival FOREIGN KEY (IdCartaTrampaRival) REFERENCES CartaTrampa(idCartaT)
 );
+
+/* Hello */
