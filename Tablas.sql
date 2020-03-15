@@ -24,7 +24,7 @@ CREATE TABLE Mazo(
 	TotalCartasMontruo INT,
 	TotalCartasMagica INT,
 	TotalCartasTrampa INT,
-    codJugador VARCHAR2(30), 
+        codJugador VARCHAR2(30), 
 	CONSTRAINT PK_Mazo PRIMARY KEY (CodMazo),
 	CONSTRAINT FK_codJugadorM FOREIGN KEY (codJugador) REFERENCES Jugador(CodJugador)
 );
@@ -33,7 +33,7 @@ CREATE TABLE Duelo(
 	IdDuelo VARCHAR2(30),
 	CodJugador1 VARCHAR2(30),
 	CodJugador2 VARCHAR2(30),
-    CodMazoJ1 VARCHAR2(30),
+        CodMazoJ1 VARCHAR2(30),
 	CodMazoJ2 VARCHAR2(30),
 	fechaDuelo DATE,
 	duracion INT,
@@ -58,7 +58,7 @@ CREATE TABLE Carta(
 );
 
 CREATE TABLE CartaMostruo(
-    idCartaM VARCHAR2(30),
+        idCartaM VARCHAR2(30),
 	Atributo VARCHAR2(30),
 	tipo VARCHAR2(30),
 	Nivel INT,
