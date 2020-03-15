@@ -135,8 +135,8 @@ CREATE TABLE HistorialDuelos (
     CantidadTurnosGanados int,
     CONSTRAINT PK_HistorialDuelos PRIMARY KEY(IdDuelo,ganador),
     /*FALTAN LAS FOREIGN KEYS*/
-    CONSTRAINT FK_TurnoDuelo FOREIGN KEY(IdDuelo) REFERENCES Duelo(IdDuelo) CASCADE CONSTRAINTS,
-    CONSTRAINT FK_GanadorDuelo FOREIGN KEY(ganador) REFERENCES Jugador(CodJugador) CASCADE CONSTRAINTS
+    CONSTRAINT FK_TurnoDuelo FOREIGN KEY(IdDuelo) REFERENCES Duelo(IdDuelo) CASCADE ON DELETE CASCADE,
+    CONSTRAINT FK_GanadorDuelo FOREIGN KEY(ganador) REFERENCES Jugador(CodJugador) ON DELETE CASCADE
     );
 show errors;
     
