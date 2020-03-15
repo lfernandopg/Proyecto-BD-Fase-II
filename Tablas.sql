@@ -24,7 +24,7 @@ CREATE TABLE Mazo(
 	TotalCartasMontruo INT,
 	TotalCartasMagica INT,
 	TotalCartasTrampa INT,
-  codJugador VARCHAR2(30), 
+    codJugador VARCHAR2(30), 
 	CONSTRAINT PK_Mazo PRIMARY KEY (CodMazo),
 	CONSTRAINT FK_codJugadorM FOREIGN KEY (codJugador) REFERENCES Jugador(CodJugador)
 );
@@ -33,7 +33,7 @@ CREATE TABLE Duelo(
 	IdDuelo VARCHAR2(30),
 	CodJugador1 VARCHAR2(30),
 	CodJugador2 VARCHAR2(30),
-  CodMazoJ1 VARCHAR2(30),
+    CodMazoJ1 VARCHAR2(30),
 	CodMazoJ2 VARCHAR2(30),
 	fechaDuelo DATE,
 	duracion INT,
@@ -58,13 +58,14 @@ CREATE TABLE Carta(
 );
 
 CREATE TABLE CartaMostruo(
-  idCartaM VARCHAR2(30),
+    idCartaM VARCHAR2(30),
 	Atributo VARCHAR2(30),
 	tipo VARCHAR2(30),
 	Nivel INT,
 	PuntosAtaque INT,
 	PuntosDefensa INT,
 	CONSTRAINT PK_CartaMostruo PRIMARY KEY (idCartaM)
+	CONSTRAINT FK_idCartaM FOREIGN KEY (idCartaM) REFERENCES Carta(IdCarta)
 );
 
 CREATE TABLE CartaMagica(
@@ -72,12 +73,14 @@ CREATE TABLE CartaMagica(
 	efectoEspecial VARCHAR2(30),
 	TIpodeMagia VARCHAR2(30),
 	CONSTRAINT PK_CartaMagica PRIMARY KEY (idCartaMa)
+	CONSTRAINT FK_idCartaMa FOREIGN KEY (idCartaMa) REFERENCES Carta(IdCarta)
 );
 
 CREATE TABLE CartaTrampa(
 	idCartaT VARCHAR2(30),
 	TipodeTrampa VARCHAR2(30),
 	CONSTRAINT PK_CartaTrampa PRIMARY KEY (idCartaT)
+	CONSTRAINT FK_idCartaT FOREIGN KEY (idCartaT) REFERENCES Carta(IdCarta)
 );
 
 CREATE TABLE Turno(
@@ -99,4 +102,3 @@ CREATE TABLE Turno(
 	CONSTRAINT FK_IdCartaTrampaJugador FOREIGN KEY (IdCartaTrampaJugador) REFERENCES CartaTrampa(idCartaT),
 	CONSTRAINT FK_IdCartaTrampaRival FOREIGN KEY (IdCartaTrampaRival) REFERENCES CartaTrampa(idCartaT)
 );
-
