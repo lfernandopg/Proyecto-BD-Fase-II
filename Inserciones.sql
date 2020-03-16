@@ -1,0 +1,59 @@
+INSERT INTO Jugador VALUES('JUG001','Yugi Muto' ,'M','23/01/2004',153,0,0);
+INSERT INTO Jugador VALUES('JUG002','Anzu Mazaki' ,'F','02/10/2006',165,0,0);
+INSERT INTO Jugador VALUES('JUG003','Katsuya Jonouchi' ,'M','15/10/2005',178,0,0);
+INSERT INTO Jugador VALUES('JUG004','Hiroto Honda' ,'M','09/04/2006',189,0,0);
+INSERT INTO Jugador VALUES('JUG005','Sugoroku Muto' ,'M','21/10/1950',176,0,0);
+INSERT INTO Jugador VALUES('JUG006','Ryo Bakura' ,'M','30/06/2004',175,0,0);
+INSERT INTO Jugador VALUES('JUG007','Rebecca Hopkins' ,'F','24/12/2008',150,0,0);
+INSERT INTO Jugador VALUES('JUG008','Ryuji Otogi' ,'M','05/08/2000',170,0,0);
+INSERT INTO Jugador VALUES('JUG009','Mai Kujaku' ,'F','22/05/1998',171,0,0);
+INSERT INTO Jugador VALUES('JUG010','Pegasus J. Crawford' ,'M','24/07/1995',190,0,0);
+
+INSERT INTO Mazo VALUES('MAZ001','Hero',0,0,0,'JUG001');
+INSERT INTO Mazo VALUES('MAZ002','Nekroz',0,0,0,'JUG002');
+INSERT INTO Mazo VALUES('MAZ003','Subterror',0,0,0,'JUG003');
+INSERT INTO Mazo VALUES('MAZ004','Mythical Endymion',0,0,0,'JUG004');
+INSERT INTO Mazo VALUES('MAZ005','Paleozoic Frog',0,0,0,'JUG005');
+INSERT INTO Mazo VALUES('MAZ006','Lunalight Simorgh',0,0,0,'JUG006');
+INSERT INTO Mazo VALUES('MAZ007','Shaddoll',0,0,0,'JUG007');
+INSERT INTO Mazo VALUES('MAZ008','Salamangreat',0,0,0,'JUG008');
+INSERT INTO Mazo VALUES('MAZ009','Zombie',0,0,0,'JUG009');
+INSERT INTO Mazo VALUES('MAZ010','Rokket',0,0,0,'JUG010');
+INSERT INTO Mazo VALUES('MAZ011','Shadow',0,0,0,'JUG001');
+INSERT INTO Mazo VALUES('MAZ012','Light',0,0,0,'JUG002');
+
+INSERT INTO Duelo VALUES('DUE001','JUG001','JUG002','MAZ001','MAZ002','21/02/2020',150,'Yugi Muto VS Anzu Mazaki');
+INSERT INTO Duelo VALUES('DUE002','JUG002','JUG010','MAZ002','MAZ010','10/01/2020',60,'Anzu Mazaki VS Pegasus J. Crawford');
+INSERT INTO Duelo VALUES('DUE003','JUG002','JUG007','MAZ002','MAZ007','19/05/2019',130,'Anzu Mazaki VS Rebecca Hopkins');
+INSERT INTO Duelo VALUES('DUE004','JUG004','JUG002','MAZ004','MAZ002','24/10/2018',141,'Hiroto Honda VS Anzu Mazaki');
+INSERT INTO Duelo VALUES('DUE005','JUG006','JUG001','MAZ006','MAZ001','08/09/2019',70,'Ryo Bakura VS Yugi Muto');
+
+INSERT INTO Duelo VALUES('DUE006','JUG005','JUG009','MAZ005','MAZ009','28/02/2020',52,'Sugoroku Muto VS Mai Kujaku');
+
+INSERT INTO Duelo VALUES('DUE007','JUG005','JUG002','MAZ005','MAZ002','03/03/2020',80,'Sugoroku Muto VS Anzu Mazaki');
+INSERT INTO Duelo VALUES('DUE008','JUG006','JUG010','MAZ006','MAZ010','15/02/2020',31,'Ryo Bakura VS Pegasus J. Crawford');
+INSERT INTO Duelo VALUES('DUE009','JUG008','JUG001','MAZ008','MAZ001','12/05/2019',45,'Ryuji Otogi VS Yugi Muto');
+INSERT INTO Duelo VALUES('DUE010','JUG001','JUG002','MAZ001','MAZ002','22/07/2019',90,'Yugi Muto VS Anzu Mazaki');
+
+INSERT INTO Duelo VALUES('DUE011','JUG006','JUG002','MAZ006','MAZ002','25/06/2018',110,'Ryo Bakura VS Anzu Mazaki');
+INSERT INTO Duelo VALUES('DUE012','JUG007','JUG008','MAZ007','MAZ008','01/05/2020',26,'Rebecca Hopkins VS Ryuji Otogi');
+INSERT INTO Duelo VALUES('DUE013','JUG010','JUG005','MAZ010','MAZ005','11/12/2018',55,'Pegasus J. Crawford VS Sugoroku Muto');
+INSERT INTO Duelo VALUES('DUE014','JUG003','JUG004','MAZ003','MAZ004','10/11/2019',75,'Katsuya Jonouchi VS Hiroto Honda');
+INSERT INTO Duelo VALUES('DUE015','JUG003','JUG008','MAZ003','MAZ008','19/01/2020',39,'Katsuya Jonouchi VS Ryuji Otogi');
+
+INSERT INTO Carta VALUES('CAR001','Flame Swordsman','Segunda','SDK089','Nivel','Monstruo','MAZ001');
+INSERT INTO CartaMostruo VALUES('CAR001','Luz','Guerrero','8','4000','3000');
+INSERT INTO Carta VALUES('CAR045','Number 39 UTOPIA','Decima','LOB068','Spirit','Magica','MAZ001');
+INSERT INTO CartaMagica VALUES('CAR045','Invocacion desde Deck','normal');
+INSERT INTO Carta VALUES('CAR014','Castigo Divino','Decima','MRD024','Equipo','Trampa','MAZ001');
+INSERT INTO CartaTrampa VALUES('CAR014','contraefecto');
+
+INSERT INTO Carta VALUES('CAR020','Alien Hunter','Primera','BIK131','Escala','Monstruo','MAZ002');
+INSERT INTO CartaMostruo VALUES('CAR020','Fuego','Fusion','8','7000','0');
+INSERT INTO Carta VALUES('CAR019','Bomba Negra','Novena','MRL033','Contador','Magica','MAZ002');
+INSERT INTO CartaMagica VALUES('CAR019','Ataque restringido','juego rapido');
+INSERT INTO Carta VALUES('CAR018','Mystical Space','Segunda','SDY062','Volteo','Trampa','MAZ002');
+INSERT INTO CartaTrampa VALUES('CAR018','normal');
+
+INSERT INTO Turno VALUES('TUR001','DUE001','JUG001','CAR001','CAR045','CAR014','CAR018','Ataque',1000,2000);
+INSERT INTO Turno VALUES('TUR002','DUE001','JUG002','CAR020','CAR019','CAR018','CAR014','Defensa',2000,0);
