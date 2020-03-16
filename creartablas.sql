@@ -67,7 +67,7 @@ CREATE TABLE CartaMagica(
 	TIpodeMagia VARCHAR2(30),
 	CONSTRAINT PK_CartaMagica PRIMARY KEY (idCartaMa),
 	CONSTRAINT FK_idCartaMa FOREIGN KEY (idCartaMa) REFERENCES Carta(IdCarta) ON DELETE CASCADE,
-  CONSTRAINT TipoMagia CHECK (TIpodeMagia IN ('normal','continua','juego rápido','campo','equipo','ritual'))
+  CONSTRAINT TipoMagia CHECK (TIpodeMagia IN ('normal','continua','juego rapido','campo','equipo','ritual'))
 );
 
 CREATE TABLE CartaTrampa(
