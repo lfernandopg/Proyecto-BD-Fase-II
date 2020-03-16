@@ -58,7 +58,7 @@ CREATE TABLE CartaMostruo(
 	PuntosDefensa INT CHECK (PuntosDefensa>=0),
 	CONSTRAINT PK_CartaMostruo PRIMARY KEY (idCartaM),
 	CONSTRAINT FK_idCartaM FOREIGN KEY (idCartaM) REFERENCES Carta(IdCarta) ON DELETE CASCADE,
-  CONSTRAINT AtributoCartaMonstruo CHECK (Atributo IN ('Agua','Fuego','Luz','Oscuridad','Tierra','viento'))
+  CONSTRAINT AtributoCartaMonstruo CHECK (Atributo IN ('Agua','Fuego','Luz','Oscuridad','Tierra','Viento'))
 );
 
 CREATE TABLE CartaMagica(
