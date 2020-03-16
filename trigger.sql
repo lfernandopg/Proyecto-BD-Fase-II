@@ -1,5 +1,5 @@
 CREATE OR REPLACE TRIGGER ActualizarHistorial
-  AFTER INSERT ON Turno
+  BEFORE INSERT ON Turno
   FOR EACH ROW WHEN(new.LPRival=0)
   
   DECLARE
