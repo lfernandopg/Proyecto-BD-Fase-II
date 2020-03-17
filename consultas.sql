@@ -14,7 +14,74 @@ cuya edad sea menor a 15.*/
 SELECT *
 FROM Jugador J
 WHERE CalcularEdad(J.fechaNacimiento) <= 15 AND J.DuelosGanados >= 3;
+/*********************************************************/
 
-/***************************************************************************/
+
+/* C. para cada jugador listar los nombres de los mazos y la cantidad de cartas en total
+que tiene ese mazo. Debe mostrarse el nombre del jugador */
+
+SELECT J.nombreCompleto "Nombre Jugador", M.nombre "Nombre Mazo", N.cantidad "Cantidad Cartas"
+FROM Jugador J, Mazo M,
+(SELECT M.codMazo, COUNT(C.idCarta) Cantidad 		
+ FROM Mazo M, Carta C 
+ WHERE C.codMazo = M.codMazo
+ GROUP BY M.codMazo) N
+WHERE J.codJugador = M.codJugador AND M.codMazo = N.codMazo;
+
+
+/*********************************************************/
+/*D. Cantidad de duelos entre “yugi muto” y “Katsuya Jonouchi”*/
+SELECT count(D.idDuelo) "Numero de Duelos"
+FROM Duelo D,
+(SELECT J.codJugador
+ FROM Jugador J
+ WHERE J.nombreCompleto LIKE '%Yugi Muto%') J1, 
+(SELECT J.codJugador
+ FROM Jugador J
+ WHERE J.nombreCompleto LIKE '%Katsuya Jonouchi%') J2
+WHERE ((D.CodJugador1 = J1.codJugador) OR  
+	   (D.CodJugador1 = J2.codJugador)) AND
+	  ((D.CodJugador2 = J1.codJugador) OR   
+	   (D.CodJugador2 = J2.codJugador));
+
+/************************************************************/
+
+/*E. jugadores que tienen al menos 2 mazos con la carta de nombre “ Mago Oscuro”
+y que la cantidad de cartas de ese mazo sea mayor a 20.*/
+
+SELECT j.nombrecompleto "Nombre Jugador"
+FROM Jugador J,
+(SELECT DISTINCT M.codMazo, M.codJugador
+FROM Mazo M, Carta C
+WHERE C.nombre LIKE '%Mago Oscuro%' AND C.codMazo = M.codMazo AND
+	  C.codMazo IN (SELECT M.codMazo		
+	  				FROM Mazo M, Carta C 
+	  				WHERE C.codMazo = M.codMazo
+	  				GROUP BY M.codMazo
+	  				HAVING count(C.idCarta) >= 20)) M
+WHERE J.codJugador = M.codJugador
+GROUP BY j.nombrecompleto
+HAVING count(M.codMazo) >= 2;
+
+/*************************************************************/
+
+/*F. Listar la información de todas las cartas de la primera edición que se han usado en
+duelos que tiene mas de 3 turnos*/
+
+SELECT C.*
+FROM Carta C, 
+(SELECT C.idCarta
+FROM Carta C, Turno T
+WHERE C.edicion LIKE '%Primera%' AND
+	 (C.idCarta = T.idCartaMostruoJugador OR
+	  C.idCarta = T.idCartaMagicaJugador OR
+	  C.idCarta = T.idCartaTrampaJugador OR
+	  C.idCarta = T.idCartaTrampaRival)
+GROUP BY C.idCarta
+HAVING count(T.idTurno) >= 3) Ca
+WHERE C.idCarta = Ca.idCarta;
+
+/*************************************************************/
+
 
 
