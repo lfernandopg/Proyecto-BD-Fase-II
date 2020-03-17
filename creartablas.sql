@@ -7,16 +7,16 @@ CREATE TABLE Jugador(
 	DuelosParticipado INT CHECK (DuelosParticipado>=0),
 	DuelosGanados INT CHECK (DuelosGanados>=0),
 	CONSTRAINT PK_Jugador PRIMARY KEY (CodJugador),
-  CONSTRAINT GeneroJugador CHECK (genero IN ('M','F'))
+	CONSTRAINT GeneroJugador CHECK (genero IN ('M','F'))
 );
 
-CREATE TABLE Mazo(--CHECK (>=0)
+CREATE TABLE Mazo(
 	CodMazo VARCHAR2(30),
 	nombre VARCHAR2(30) NOT NULL,
 	TotalCartasMontruo INT CHECK (TotalCartasMontruo>=0),
 	TotalCartasMagica INT CHECK (TotalCartasMagica>=0),
 	TotalCartasTrampa INT CHECK (TotalCartasTrampa>=0),
-  codJugador VARCHAR2(30), 
+	codJugador VARCHAR2(30), 
 	CONSTRAINT PK_Mazo PRIMARY KEY (CodMazo),
 	CONSTRAINT FK_codJugadorM FOREIGN KEY (codJugador) REFERENCES Jugador(CodJugador)ON DELETE CASCADE
 );
@@ -25,7 +25,7 @@ CREATE TABLE Duelo(
 	IdDuelo VARCHAR2(30),
 	CodJugador1 VARCHAR2(30),
 	CodJugador2 VARCHAR2(30),
-  CodMazoJ1 VARCHAR2(30),
+	CodMazoJ1 VARCHAR2(30),
 	CodMazoJ2 VARCHAR2(30),
 	fechaDuelo DATE,
 	duracion INT CHECK (duracion>=1),
@@ -50,7 +50,7 @@ CREATE TABLE Carta(
 );
 
 CREATE TABLE CartaMostruo(
-  idCartaM VARCHAR2(30),
+	idCartaM VARCHAR2(30),
 	Atributo VARCHAR2(30),
 	tipo VARCHAR2(30),
 	Nivel INT CHECK (Nivel>=0),
@@ -58,7 +58,7 @@ CREATE TABLE CartaMostruo(
 	PuntosDefensa INT CHECK (PuntosDefensa>=0),
 	CONSTRAINT PK_CartaMostruo PRIMARY KEY (idCartaM),
 	CONSTRAINT FK_idCartaM FOREIGN KEY (idCartaM) REFERENCES Carta(IdCarta) ON DELETE CASCADE,
-  CONSTRAINT AtributoCartaMonstruo CHECK (Atributo IN ('Agua','Fuego','Luz','Oscuridad','Tierra','Viento'))
+	CONSTRAINT AtributoCartaMonstruo CHECK (Atributo IN ('Agua','Fuego','Luz','Oscuridad','Tierra','Viento'))
 );
 
 CREATE TABLE CartaMagica(
@@ -67,7 +67,7 @@ CREATE TABLE CartaMagica(
 	TIpodeMagia VARCHAR2(30),
 	CONSTRAINT PK_CartaMagica PRIMARY KEY (idCartaMa),
 	CONSTRAINT FK_idCartaMa FOREIGN KEY (idCartaMa) REFERENCES Carta(IdCarta) ON DELETE CASCADE,
-  CONSTRAINT TipoMagia CHECK (TIpodeMagia IN ('normal','continua','juego rapido','campo','equipo','ritual'))
+	CONSTRAINT TipoMagia CHECK (TIpodeMagia IN ('normal','continua','juego rapido','campo','equipo','ritual'))
 );
 
 CREATE TABLE CartaTrampa(
@@ -75,7 +75,7 @@ CREATE TABLE CartaTrampa(
 	TipodeTrampa VARCHAR2(30),
 	CONSTRAINT PK_CartaTrampa PRIMARY KEY (idCartaT),
 	CONSTRAINT FK_idCartaT FOREIGN KEY (idCartaT) REFERENCES Carta(IdCarta) ON DELETE CASCADE,
-  CONSTRAINT TipoTrampa CHECK (TipodeTrampa IN ('normal','continua','contraefecto'))
+	CONSTRAINT TipoTrampa CHECK (TipodeTrampa IN ('normal','continua','contraefecto'))
 );
 
 CREATE TABLE Turno(
@@ -96,7 +96,7 @@ CREATE TABLE Turno(
 	CONSTRAINT FK_IdCartaMagicaJugador FOREIGN KEY (IdCartaMagicaJugador) REFERENCES CartaMagica(idCartaMa) ON DELETE CASCADE,
 	CONSTRAINT FK_IdCartaTrampaJugador FOREIGN KEY (IdCartaTrampaJugador) REFERENCES CartaTrampa(idCartaT) ON DELETE CASCADE,
 	CONSTRAINT FK_IdCartaTrampaRival FOREIGN KEY (IdCartaTrampaRival) REFERENCES CartaTrampa(idCartaT) ON DELETE CASCADE,
-  CONSTRAINT Posicionturno CHECK (posicion IN ('Ataque','Defensa'))
+	CONSTRAINT Posicionturno CHECK (posicion IN ('Ataque','Defensa'))
 );
 
 CREATE TABLE PaqueteColeccionable(
@@ -109,39 +109,38 @@ CREATE TABLE PaqueteColeccionable(
     tipopaquete varchar2(30),
     fechaCompraJugador date,
     CodJugador varchar2(30),
-    CONSTRAINT PK_PaqueteColeccionable PRIMARY KEY(CodigoUnico),/*falta la ,*/
+    CONSTRAINT PK_PaqueteColeccionable PRIMARY KEY(CodigoUnico),
     CONSTRAINT FK_jugador FOREIGN KEY (CodJugador) REFERENCES Jugador (CodJugador) ON DELETE CASCADE
-    );
+);
     
 CREATE TABLE BarajaInicio(
     IdPaqueteInicio varchar2(30),
-    CantidadCartasComunes int CHECK (CantidadCartasComunes>=1),
-    CantidadCartasUltraRaras int CHECK (CantidadCartasUltraRaras>=1),
-    CantidadCartasSuperRaras int CHECK (CantidadCartasSuperRaras>=1),
+    CantidadCartasComunes int CHECK (CantidadCartasComunes>=0),
+    CantidadCartasUltraRaras int CHECK (CantidadCartasUltraRaras>=0),
+    CantidadCartasSuperRaras int CHECK (CantidadCartasSuperRaras>=0),
     CONSTRAINT PK_BarajaInicio PRIMARY KEY(IdPaqueteInicio),
     CONSTRAINT FK_PaqueteInicio FOREIGN KEY(IdPaqueteInicio) REFERENCES PaqueteColeccionable (CodigoUnico) ON DELETE CASCADE
-    );
+);
     
 CREATE TABLE SobreExpansion (
     IdSobreExpansion varchar2(30),
-    CantidadCartasComunes int CHECK (CantidadCartasComunes>=1),
-    CantidadCartasRaras int CHECK (CantidadCartasRaras>=1),
-    CantidadCartasRarasSecretas int CHECK (CantidadCartasRarasSecretas>=1),
-    CantidadCartasUltraRaras int CHECK (CantidadCartasUltraRaras>=1),
-    CartasSuperRaras int CHECK (CartasSuperRaras>=1),
-    CartasUltrararas int CHECK  (CartasUltrararas>=1),
+    CantidadCartasComunes int CHECK (CantidadCartasComunes>=0),
+    CantidadCartasRaras int CHECK (CantidadCartasRaras>=0),
+    CantidadCartasRarasSecretas int CHECK (CantidadCartasRarasSecretas>=0),
+    CantidadCartasUltraRaras int CHECK (CantidadCartasUltraRaras>=0),
+    CartasSuperRaras int CHECK (CartasSuperRaras>=0),
+    CartasUltrararas int CHECK  (CartasUltrararas>=0),
     CONSTRAINT PK_SobreExpansion PRIMARY KEY(IdSobreExpansion),
     CONSTRAINT FK_PaqueteExpansion FOREIGN KEY(IdsobreExpansion) REFERENCES PaqueteColeccionable (CodigoUnico) ON DELETE CASCADE
-    );
+);
     
 CREATE TABLE HistorialDuelos (
     IdDuelo varchar2(30),
     ganador varchar2(30),
     CantidadTurnosJugados int CHECK  (CantidadTurnosJugados>=1),
-    CONSTRAINT PK_HistorialDuelos PRIMARY KEY(IdDuelo,ganador),
-    /*FALTAN LAS FOREIGN KEYS*/
+    CONSTRAINT PK_HistorialDuelos PRIMARY KEY(IdDuelo),
     CONSTRAINT FK_TurnoDuelo FOREIGN KEY(IdDuelo) REFERENCES Duelo(IdDuelo) ON DELETE CASCADE,
     CONSTRAINT FK_GanadorDuelo FOREIGN KEY(ganador) REFERENCES JUGADOR(CodJugador) ON DELETE CASCADE
-    );
+);
 show errors;
     
