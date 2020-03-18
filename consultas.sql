@@ -30,7 +30,7 @@ WHERE J.codJugador = M.codJugador AND M.codMazo = N.codMazo;
 
 
 /*********************************************************/
-/*D. Cantidad de duelos entre “yugi muto” y “Katsuya Jonouchi”*/
+/*D. Cantidad de duelos entre ​“yugi muto” y ​“​Katsuya Jonouchi”*/
 SELECT count(D.idDuelo) "Numero de Duelos"
 FROM Duelo D,
 (SELECT J.codJugador
@@ -82,6 +82,46 @@ HAVING count(T.idTurno) >= 3) Ca
 WHERE C.idCarta = Ca.idCarta;
 
 /*************************************************************/
+
+/* I. Nombre mazos que cumplan con alguna de las siguientes condiciones:
+a. Pertenecen a jugadores masculinos y tiene al menos 5 cartas mágicas de
+tercera generación.
+b. Pertenecen a jugadores femeninos que hayan participado en mas de 5 duelos ,
+que tengan al menos 2 sobres de expansión en su propiedad y hayan ganado
+en tantos o más duelos que la cantidad de duelos en las que ha participado el
+jugador “Pegasus J. Crawford” */
+
+SELECT DISTINCT M.nombre
+FROM Mazo M,
+(SELECT M.codMazo
+ FROM Jugador J, Mazo M, Carta C, CartaMagica Ma
+ WHERE J.codJugador = M.codJugador AND
+	  C.codMazo = M.codMazo AND
+	  Ma.idcartaMa = C.idCarta AND
+	  C.edicion LIKE '%Tercera%' AND
+	  J.genero = 'M'
+ GROUP BY M.codMazo
+ HAVING count(C.idCarta) >= 5) Ma,
+(SELECT M.codMazo
+FROM Mazo M,
+(SELECT j.codjugador
+FROM SobreExpansion SE, PaqueteColeccionable PC,
+(SELECT j.codjugador
+FROM Jugador J
+WHERE  J.genero = 'F' AND J.DuelosParticipado >= 5 AND
+	   J.DuelosGanados >= (SELECT J.DuelosParticipado
+                           FROM Jugador J
+                           WHERE J.nombreCompleto LIKE '%Pegasus J. Crawford%')) J
+WHERE J.codjugador = PC.codjugador AND
+	  PC.CodigoUnico = SE.IdSobreExpansion
+GROUP BY j.codjugador
+HAVING COUNT(pc.codigounico) >= 2) J
+WHERE M.codJugador = J.codJugador) Mb 
+WHERE M.codMazo = Ma.codMazo OR M.codMazo = Mb.codMazo;  
+
+
+/*************************************************************/
+
 
 
 
