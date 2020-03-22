@@ -1,4 +1,22 @@
- /*Consulta H NOMBRE DEL PAQUETE DE EXPANCION DE PRIMERA GENERACION QUE TENGAN EN SU COLECCION TODOS LOS JUGADORES*/
+/*consulta B JUGADOR QUE HA BATALLADO MAS VECES CONTRA YUGI MUTO*/
+
+select jugador.nombrecompleto
+  from jugador,(      
+      Select aux.CODIGO as codigo, SUM(aux.CANT) AS encuentros
+          FROM
+          (select duelo.CodJugador1 AS CODIgO , count(duelo.codjugador2) AS CANT
+            from duelo ,jugador j
+            where duelo.CodJugador2=j.CodJugador and j.nombrecompleto ='Yugi Muto'
+            group by duelo.codjugador1    
+          UNION    
+          select duelo.CodJugador2 AS CODIGO, count(duelo.codjugador1)AS CANT
+            from duelo ,jugador j
+            where duelo.CodJugador1=j.CodJugador and j.nombrecompleto ='Yugi Muto' 
+            group by duelo.codjugador2) aux
+      group by aux.CODIGO order by encuentros desc ) total
+where total.codigo=jugador.codjugador and rownum=1;
+
+/*Consulta H NOMBRE DEL PAQUETE DE EXPANCION DE PRIMERA GENERACION QUE TENGAN EN SU COLECCION TODOS LOS JUGADORES*/
 select paquete.nombre
   FROM (SELECT nombre, count(DISTINCT Codjugador) cantidad
             FROM Paquetecoleccionable
